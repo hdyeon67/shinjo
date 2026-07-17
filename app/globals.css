@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cloud: #fbf3ff;
+  --ink: #2a2440;
+  --candy: #ff5fa2;
+  --grape: #7c6cff;
+  --aqua: #3bd6e6;
+
+  /* shadcn 계열 토큰 (HSL) — 파스텔 팔레트 */
+  --foreground: 252 28% 20%; /* 잉크 */
+  --muted-foreground: 252 12% 46%;
+  --border: 270 60% 90%; /* 연보라 라인 */
+  --primary: 331 100% 68%; /* 캔디 핑크 */
+}
+
+html,
+body {
+  background-color: var(--cloud);
+  color: var(--ink);
+}
+
+body {
+  font-family: Pretendard, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 애니메이션 ─────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 언어 나이 숫자 등장 — 팝 스케일 */
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* 글리터 반짝임 */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(20deg);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.55s ease-out both;
+}
+.animate-pop-in {
+  animation: pop-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-twinkle {
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-pop-in,
+  .animate-twinkle {
+    animation: none;
+  }
+}
+
+/* ── 컴포넌트 프리미티브 ────────────────────── */
+/* 통통 라운드 스티커 카드 (잉크 외곽선 + 오프셋 그림자) */
+.sticker {
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 5px 5px 0 0 rgba(42, 39, 64, 0.16);
+  background: #fff;
+}
+
+/* Y2K 결과 카드 — 파스텔 그라데이션 + 반짝이 테두리 */
+.y2k-card {
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow:
+    5px 5px 0 0 rgba(42, 39, 64, 0.16),
+    inset 0 0 0 3px rgba(255, 255, 255, 0.7);
+  background: linear-gradient(135deg, #ffd9ec 0%, #e7d3ff 48%, #cdf3f8 100%);
+}
+
+/* 픽셀 글자 렌더링 또렷하게 */
+.pixel {
+  font-family: "Press Start 2P", "DungGeunMo", monospace;
+  letter-spacing: 0.02em;
+  image-rendering: pixelated;
+}
