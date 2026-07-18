@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGuide, GUIDE_SLUGS } from "@/lib/content/guides";
-import { AdSlot } from "@/components/AdSlot";
 
 type Params = Promise<{ slug: string }>;
 
@@ -60,9 +59,6 @@ export default async function GuidePage({ params }: { params: Params }) {
           </section>
         ))}
       </article>
-
-      {/* 광고 슬롯 (가이드 본문 하단) — env 있을 때만 */}
-      <AdSlot />
 
       <section className="mt-9">
         <h2 className="mb-3 text-lg font-bold text-ink">자주 묻는 질문</h2>

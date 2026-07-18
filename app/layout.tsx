@@ -3,7 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
-import { AdRails } from "@/components/AdRails";
+import { AdRails, AdBottomMobile } from "@/components/AdRails";
 import { SITE, siteUrl } from "@/lib/config/site";
 import { ADS_ENABLED, ADSENSE_CLIENT } from "@/lib/config/flags";
 
@@ -53,6 +53,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
         {children}
+        {/* 모바일 하단 배너 — 응시("/quiz") 제외 전 페이지(랜딩 포함). 단위 ID 있을 때만 노출 */}
+        <AdBottomMobile className="mx-auto flex max-w-md justify-center px-5 pb-4" />
         <Footer
           logoSrc={null}
           links={[

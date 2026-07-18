@@ -70,7 +70,7 @@ npm run cf:build && npm run cf:deploy
 | `NEXT_PUBLIC_POSTHOG_KEY` (+ `_HOST`) | PostHog 계측(쿠키리스) |
 | `NEXT_PUBLIC_CF_BEACON_TOKEN` | Cloudflare Web Analytics |
 
-광고: **결과·가이드 페이지에만** 인라인 슬롯, 랜딩·응시(`/quiz`)에는 없음.
+광고(회사 정책 2026-07-18): **랜딩 포함 전 화면 노출** — AdRails(PC 세로 레일)+AdBottomMobile(모바일 하단 배너)을 레이아웃에 두고, **응시(`/quiz`)에서만 숨김**. env 온오프.
 
 ## 계측 이벤트 (app="shinjo", PII 미전송)
 

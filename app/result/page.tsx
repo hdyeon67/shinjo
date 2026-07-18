@@ -9,7 +9,6 @@ import { WrongAnswers, type ReviewItem } from "@/components/result/WrongAnswers"
 import { ResultActions } from "@/components/result/ResultActions";
 import { ResultTracker } from "@/components/result/ResultTracker";
 import { CrossPromo } from "@/components/CrossPromo";
-import { AdSlot } from "@/components/AdSlot";
 
 export async function generateMetadata({
   searchParams,
@@ -86,17 +85,11 @@ export default async function ResultPage({
 
       <ResultActions seed={payload.seed} shareTitle={shareTitle} shareDesc={shareDesc} />
 
-      {/* 광고 슬롯 1 (결과 상단) — env 있을 때만 */}
-      <AdSlot />
-
       <WrongAnswers items={review} />
 
       <div className="mt-8">
         <CrossPromo />
       </div>
-
-      {/* 광고 슬롯 2 (결과 하단) */}
-      <AdSlot />
 
       <p className="text-ink-faint/80 mt-8 text-center text-[11px] leading-relaxed">
         재미·참고용 진단 · 언어 능력이나 세대를 규정하지 않아요

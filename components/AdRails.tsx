@@ -2,20 +2,24 @@
 
 import { usePathname } from "next/navigation";
 import { AdFit } from "./AdFit";
-import { ADFIT_UNIT_PC_LEFT, ADFIT_UNIT_PC_RIGHT } from "@/lib/config/flags";
+import { ADFIT_UNIT_PC_LEFT, ADFIT_UNIT_PC_RIGHT, ADFIT_UNIT_MOBILE } from "@/lib/config/flags";
 
-/** 광고를 노출할 경로: 결과·가이드만 (랜딩·응시·about·privacy 제외). */
-function adAllowed(pathname: string): boolean {
-  return pathname === "/result" || pathname === "/guide" || pathname.startsWith("/guide/");
+// 회사 광고 정책(2026-07-18 확정): 시작(랜딩)부터 결과까지 전 화면에 광고를 붙인다.
+// 예외는 (1) 응시("/quiz") — 완주율 보호, (2) 콘텐츠 부적절 화면(예: 축의금 장례)뿐.
+// shinjo 는 응시만 예외이므로 /quiz 에서만 광고를 숨긴다(랜딩·결과·가이드·about·privacy 노출).
+
+/** 광고 제외 경로 (응시 화면만) */
+function adExcluded(pathname: string): boolean {
+  return pathname === "/quiz";
 }
 
 /**
  * PC 좌·우 세로 사이드 광고(160×600). xl(1280px) 이상에서만 노출.
- * 기획: 결과·가이드 페이지에서만. 단위 ID(env)가 없으면 렌더하지 않는다.
+ * 응시 화면 제외 전 페이지. 단위 ID(env)가 없으면 렌더하지 않는다.
  */
 export function AdRails() {
   const pathname = usePathname();
-  if (!adAllowed(pathname)) return null;
+  if (adExcluded(pathname)) return null;
   if (!ADFIT_UNIT_PC_LEFT && !ADFIT_UNIT_PC_RIGHT) return null;
   return (
     <>
@@ -30,5 +34,17 @@ export function AdRails() {
         </div>
       </div>
     </>
+  );
+}
+
+/** 모바일 하단 가로 배너(320×100). xl 미만에서만. 응시 화면 제외 전 페이지. */
+export function AdBottomMobile({ className = "" }: { className?: string }) {
+  const pathname = usePathname();
+  if (adExcluded(pathname)) return null;
+  if (!ADFIT_UNIT_MOBILE) return null;
+  return (
+    <div className={`xl:hidden ${className}`}>
+      <AdFit unit={ADFIT_UNIT_MOBILE} width={320} height={100} />
+    </div>
   );
 }
