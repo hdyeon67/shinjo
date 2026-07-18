@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: SITE.name,
     title: "신조어 판독기 · 내 언어 나이는?",
-    description: "최신 신조어와 레트로 유행어 10문항. 내 언어 나이와 세대를 판독해 친구와 대결해요.",
+    description: "최신 신조어 10문항. 요즘 밈으로 내 언어 나이와 세대를 판독해 친구와 대결해요.",
     // 홈/기본 공유용 브랜드 카드(1200×630). 결과 페이지는 자체 og:image 로 덮어씀.
     images: ["/api/og?fmt=home"],
   },

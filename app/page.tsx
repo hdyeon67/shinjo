@@ -4,7 +4,7 @@ export default function LandingPage() {
   return (
     <main className="mx-auto flex min-h-[85vh] max-w-md flex-col items-center justify-center px-5 py-10">
       <div className="mb-7 text-center">
-        <p className="text-grape-deep text-sm font-bold tracking-wide">최신 밈부터 그 시절 유행어까지</p>
+        <p className="text-grape-deep text-sm font-bold tracking-wide">요즘 밈으로 판독하는 나의 언어 나이</p>
         <h1 className="mt-2 text-4xl font-black leading-tight text-ink">
           신조어 판독기
         </h1>

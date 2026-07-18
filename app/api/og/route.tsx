@@ -129,7 +129,7 @@ function BrandCard({ scale }: { scale: number }) {
         }}
       >
         <div style={{ display: "flex", fontSize: px(30), color: GRAPE, letterSpacing: px(4) }}>
-          최신 밈부터 그 시절 유행어까지
+          요즘 밈으로 판독하는 언어 나이
         </div>
         <div style={{ display: "flex", fontSize: px(112), fontWeight: 700, color: INK, marginTop: px(18) }}>
           신조어 판독기

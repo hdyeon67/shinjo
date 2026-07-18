@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "소개",
   description:
-    "신조어 판독기는 최신 신조어와 레트로 유행어 10문항으로 내 '언어 나이'를 판독하는 재미 진단이에요. 만든 이유와 원칙을 소개합니다.",
+    "신조어 판독기는 최신 신조어 10문항으로 내 '언어 나이'를 판독하는 재미 진단이에요. 만든 이유와 원칙을 소개합니다.",
 };
 
 export default function AboutPage() {
