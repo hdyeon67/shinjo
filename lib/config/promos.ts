@@ -16,27 +16,12 @@ export interface PromoApp {
 
 export const PROMOS: PromoApp[] = [
   {
+    // 같은 퀴즈 결끼리만 노출 — 신조어(언어 나이)와 짝인 문해력 모의고사 (스펙 v2: shinjo → 문해력)
     id: "munhae",
     emoji: "📝",
     title: "문해력도 궁금하다면?",
     desc: "오늘의 시험지 10문항, 내 문해력 등급은",
     href: "https://munhae.fineboll.com",
     color: "#3f7fdd",
-  },
-  {
-    id: "bujeok",
-    emoji: "🧧",
-    title: "행운이 필요하다면?",
-    desc: "소원 골라 뽑는 귀여운 행운부적",
-    href: "https://bujeok.fineboll.com",
-    color: "#ff5b3a",
-  },
-  {
-    id: "chemicheck",
-    emoji: "💞",
-    title: "궁합도 궁금하다면?",
-    desc: "이름과 생년월일로 보는 케미체크",
-    href: "https://chemicheck.fineboll.com",
-    color: "#ff5db1",
   },
 ];
