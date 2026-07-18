@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
+import { AdRails } from "@/components/AdRails";
 import { SITE, siteUrl } from "@/lib/config/site";
 import { ADS_ENABLED, ADSENSE_CLIENT } from "@/lib/config/flags";
 
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen bg-cloud text-ink antialiased">
         <AnalyticsProvider />
+        <AdRails />
         {ADS_ENABLED && (
           <Script
             id="adsbygoogle-init"

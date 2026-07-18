@@ -64,7 +64,8 @@ npm run cf:build && npm run cf:deploy
 | `NEXT_PUBLIC_SITE_URL` | 절대 URL 베이스 (OG·sitemap) |
 | `PAYMENT_ENABLED` | 결제 잠금 (기본 false) |
 | `NEXT_PUBLIC_ADS_ENABLED` + `NEXT_PUBLIC_ADSENSE_CLIENT` | 애드센스 |
-| `NEXT_PUBLIC_ADFIT_UNIT_MOBILE` | 카카오 애드핏 인라인 슬롯(결과·가이드) |
+| `NEXT_PUBLIC_ADFIT_UNIT_MOBILE` | 카카오 애드핏 모바일 가로 배너(결과·가이드) |
+| `NEXT_PUBLIC_ADFIT_UNIT_PC_LEFT` / `_PC_RIGHT` | 카카오 애드핏 PC 세로 레일(결과·가이드, xl+) |
 | `NEXT_PUBLIC_KAKAO_JS_KEY` | 카카오톡 공유 버튼 |
 | `NEXT_PUBLIC_POSTHOG_KEY` (+ `_HOST`) | PostHog 계측(쿠키리스) |
 | `NEXT_PUBLIC_CF_BEACON_TOKEN` | Cloudflare Web Analytics |
