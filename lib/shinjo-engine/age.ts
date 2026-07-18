@@ -1,55 +1,27 @@
-// 언어 나이 판독 — 답안으로부터 델타 누적 → 클램프 → 세대 라벨 → (선택) 실제 나이 갭.
+// 언어 나이 판독 (v2) — "놓친 최신성만큼 나이가 붙는다".
+// AGE_BASE(15)에서 시작해 오답마다 그 문항 티어의 MISS_PENALTY 를 더하고 15~40 클램프.
 // 전부 결정적: 같은 (paper, answers) 는 항상 같은 Reading. 같은 답안 → 항상 같은 나이.
 
 import {
+  AGE_BASE,
   AGE_MAX,
   AGE_MIN,
-  BASE_AGE,
   GAP_MEDIUM_MAX,
   GAP_SMALL_MAX,
   GENERATIONS,
-  NEW_CORRECT,
-  NEW_RECENT_BONUS,
-  NEW_RECENT_YEAR,
-  NEW_WRONG,
-  RETRO_ANCIENT_BONUS,
-  RETRO_ANCIENT_YEAR,
-  RETRO_CORRECT,
-  RETRO_OLD_BONUS,
-  RETRO_OLD_YEAR,
-  RETRO_WRONG,
+  MISS_PENALTY,
 } from "./constants";
-import type { Gap, Generation, Item, Paper, Reading } from "./types";
+import { TIERS, tierOf, type Gap, type Generation, type Paper, type Reading, type Tier } from "./types";
 
-/** [lo, hi] 로 클램프 */
 function clamp(v: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, v));
 }
 
-/**
- * 문항 하나가 언어 나이에 주는 델타.
- * - 최신 신조어: 정답이면 젊어지고(최근 표현일수록 강함), 오답이면 늙어진다.
- * - 레트로 유행어: 정답이면 늙어지고(오래된 표현일수록 강함), 오답이면 젊어진다.
- */
-export function itemDelta(item: Item, correct: boolean): number {
-  if (item.direction === "new") {
-    if (!correct) return NEW_WRONG;
-    const recent = item.eraYear >= NEW_RECENT_YEAR ? NEW_RECENT_BONUS : 0;
-    return NEW_CORRECT + recent;
-  }
-  // retro
-  if (!correct) return RETRO_WRONG;
-  const old = item.eraYear <= RETRO_OLD_YEAR ? RETRO_OLD_BONUS : 0;
-  const ancient = item.eraYear <= RETRO_ANCIENT_YEAR ? RETRO_ANCIENT_BONUS : 0;
-  return RETRO_CORRECT + old + ancient;
-}
-
-/** 언어 나이가 속하는 세대 구간 (경계 밖이면 양끝 구간으로 수렴) */
+/** 언어 나이가 속하는 세대 구간 (경계 밖이면 양끝으로 수렴) */
 export function generationFor(languageAge: number): Generation {
   for (const g of GENERATIONS) {
     if (languageAge >= g.min && languageAge <= g.max) return g;
   }
-  // AGE_MIN~AGE_MAX 를 GENERATIONS 가 빈틈없이 덮으므로 방어적 반환
   return languageAge < GENERATIONS[0].min ? GENERATIONS[0] : GENERATIONS[GENERATIONS.length - 1];
 }
 
@@ -70,20 +42,30 @@ export function gapFor(realAge: number, languageAge: number): Gap {
 
 /**
  * 시험지 판독.
- * @param answers 각 문항에 고른 선택지 인덱스(미응답은 -1 또는 범위 밖 값)
+ * @param answers 각 문항에 고른 선택지 인덱스(미응답은 -1 또는 범위 밖 값 → 오답 처리)
  * @param realAge 실제 나이(선택). 유효한 양의 정수일 때만 갭을 계산한다.
  */
 export function read(paper: Paper, answers: readonly number[], realAge?: number | null): Reading {
-  let rawAge = BASE_AGE;
-  let newCorrect = 0;
-  let retroCorrect = 0;
+  let rawAge = AGE_BASE;
+  let totalCorrect = 0;
+
+  const acc: Record<Tier, { correct: number; total: number }> = {
+    A: { correct: 0, total: 0 },
+    B: { correct: 0, total: 0 },
+    C: { correct: 0, total: 0 },
+    D: { correct: 0, total: 0 },
+  };
 
   paper.items.forEach((item, i) => {
+    const tier = tierOf(item.eraYear);
+    acc[tier].total += 1;
     const correct = answers[i] === item.answerIndex;
-    rawAge += itemDelta(item, correct);
     if (correct) {
-      if (item.direction === "new") newCorrect += 1;
-      else retroCorrect += 1;
+      totalCorrect += 1;
+      acc[tier].correct += 1;
+    } else {
+      // 오답 → 놓친 표현의 최신성만큼 나이가 붙는다
+      rawAge += MISS_PENALTY[tier];
     }
   });
 
@@ -97,9 +79,9 @@ export function read(paper: Paper, answers: readonly number[], realAge?: number 
     languageAge,
     rawAge,
     generation,
-    newCorrect,
-    retroCorrect,
-    totalCorrect: newCorrect + retroCorrect,
+    totalCorrect,
+    total: paper.items.length,
+    tierScores: TIERS.map((tier) => ({ tier, correct: acc[tier].correct, total: acc[tier].total })),
     gap,
   };
 }

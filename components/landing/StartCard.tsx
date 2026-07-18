@@ -30,7 +30,7 @@ export function StartCard() {
     <div className="sticker animate-fade-up mx-auto w-full max-w-md p-6 text-center">
       <p className="pixel text-candy-deep text-[13px]">LANGUAGE AGE TEST</p>
       <p className="text-ink-soft mt-2 text-sm font-medium">
-        10문항 · 약 90초 · 최신 신조어 5 + 레트로 유행어 5
+        10문항 · 약 90초 · 최신 신조어로 보는 언어 나이
       </p>
 
       <label className="mt-5 block text-left">

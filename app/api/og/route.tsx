@@ -173,7 +173,7 @@ function Card({
   tall: boolean;
 }) {
   const px = (n: number) => Math.round(n * scale);
-  const { languageAge, generation, gap, newCorrect, retroCorrect } = reading;
+  const { languageAge, generation, gap, totalCorrect, total } = reading;
   const gapText =
     gap == null
       ? null
@@ -261,7 +261,7 @@ function Card({
           </div>
         )}
 
-        <div style={{ display: "flex", gap: px(12), marginTop: px(16) }}>
+        <div style={{ display: "flex", marginTop: px(16) }}>
           <div
             style={{
               display: "flex",
@@ -270,23 +270,10 @@ function Card({
               color: CANDY,
               border: `${px(2)}px solid ${CANDY}`,
               borderRadius: px(10),
-              padding: `${px(5)}px ${px(14)}px`,
+              padding: `${px(5)}px ${px(16)}px`,
             }}
           >
-            최신 {newCorrect}/5
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: px(17),
-              fontWeight: 700,
-              color: GRAPE,
-              border: `${px(2)}px solid ${GRAPE}`,
-              borderRadius: px(10),
-              padding: `${px(5)}px ${px(14)}px`,
-            }}
-          >
-            레트로 {retroCorrect}/5
+            최신 신조어 {totalCorrect}/{total} 적중
           </div>
         </div>
 

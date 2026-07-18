@@ -66,7 +66,6 @@ export default async function ResultPage({
   const shareDesc = "너의 언어 나이는? 같은 문제로 판독 대결 ⚔️";
 
   const review: ReviewItem[] = paper.items.map((it, i) => ({
-    direction: it.direction,
     question: it.question,
     choices: it.choices,
     correctIndex: it.answerIndex,

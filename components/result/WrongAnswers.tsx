@@ -1,8 +1,6 @@
-import type { Direction } from "@/lib/shinjo-engine";
-import { DIRECTION_LABELS } from "@/lib/shinjo-engine";
+import { tierOf, TIER_LABELS } from "@/lib/shinjo-engine";
 
 export interface ReviewItem {
-  direction: Direction;
   question: string;
   choices: string[];
   correctIndex: number;
@@ -28,14 +26,8 @@ export function WrongAnswers({ items }: { items: ReviewItem[] }) {
           return (
             <li key={i} className="sticker p-4 text-left">
               <div className="flex items-center justify-between">
-                <span
-                  className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
-                    it.direction === "new"
-                      ? "bg-candy/15 text-candy-deep"
-                      : "bg-grape/15 text-grape-deep"
-                  }`}
-                >
-                  {DIRECTION_LABELS[it.direction]} · {it.eraYear}
+                <span className="bg-candy/15 text-candy-deep rounded-full px-2.5 py-0.5 text-[11px] font-bold">
+                  {TIER_LABELS[tierOf(it.eraYear)]} 신조어 · {it.eraYear}
                 </span>
                 <span className={`text-sm font-black ${correct ? "text-aqua-deep" : "text-candy-deep"}`}>
                   {correct ? "정답 ✅" : "오답 ❌"}

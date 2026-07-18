@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { generatePaper, newSeed, parseSeed, DIRECTION_LABELS } from "@/lib/shinjo-engine";
+import { generatePaper, newSeed, parseSeed, tierOf, TIER_LABELS } from "@/lib/shinjo-engine";
 import { ITEMS } from "@/lib/content/items";
 import { encodeResult } from "@/lib/share/encode";
 import { track, durationBand } from "@/lib/analytics";
@@ -95,14 +95,8 @@ export function QuizRunner() {
 
       {/* 문항 */}
       <div key={idx} className="animate-fade-up mt-6 flex-1">
-        <span
-          className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${
-            item.direction === "new"
-              ? "bg-candy/15 text-candy-deep"
-              : "bg-grape/15 text-grape-deep"
-          }`}
-        >
-          {DIRECTION_LABELS[item.direction]}
+        <span className="bg-candy/15 text-candy-deep inline-block rounded-full px-3 py-1 text-xs font-bold">
+          {TIER_LABELS[tierOf(item.eraYear)]} 신조어
         </span>
 
         <h2 className="mt-3 text-lg font-bold leading-snug text-ink">{item.question}</h2>

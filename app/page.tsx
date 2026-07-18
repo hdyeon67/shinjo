@@ -11,7 +11,7 @@ export default function LandingPage() {
         <p className="text-ink-soft mt-3 text-[15px] leading-relaxed">
           10문항으로 판독하는 나의 <b className="text-candy-deep">언어 나이</b>.
           <br />
-          잘파어 원어민일까, 사전파 순수주의자일까?
+          잘파어 원어민일까, 신조어 무풍지대일까?
         </p>
       </div>
 

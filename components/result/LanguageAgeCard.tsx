@@ -20,7 +20,7 @@ export function LanguageAgeCard({
   reading: Reading;
   copy: ResultCopy;
 }) {
-  const { languageAge, generation, gap, newCorrect, retroCorrect } = reading;
+  const { languageAge, generation, gap, totalCorrect, total } = reading;
 
   return (
     <div id="age-card" className="y2k-card relative overflow-hidden px-6 py-8 text-center">
@@ -57,12 +57,9 @@ export function LanguageAgeCard({
         <p className="text-ink-soft mt-1.5 text-[13px] leading-relaxed">{copy.gapComment}</p>
       )}
 
-      <div className="text-ink-soft mt-5 flex justify-center gap-3 text-xs font-bold">
-        <span className="bg-candy/15 text-candy-deep rounded-lg px-3 py-1.5">
-          최신 신조어 {newCorrect}/5
-        </span>
-        <span className="bg-grape/15 text-grape-deep rounded-lg px-3 py-1.5">
-          레트로 유행어 {retroCorrect}/5
+      <div className="text-ink-soft mt-5 flex justify-center text-xs font-bold">
+        <span className="bg-candy/15 text-candy-deep rounded-lg px-4 py-1.5">
+          최신 신조어 {totalCorrect}/{total} 적중
         </span>
       </div>
 

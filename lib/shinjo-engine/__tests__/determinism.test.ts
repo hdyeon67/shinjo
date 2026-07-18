@@ -29,11 +29,10 @@ describe("결정성 — 같은 시드는 항상 같은 시험지", () => {
 
   it("parseSeed — 순수 숫자는 그대로, 문자열은 해시, 빈값/누락은 null", () => {
     expect(parseSeed("12345")).toBe(12345);
-    expect(parseSeed("12345")).toBe(parseSeed("12345")); // 안정적
+    expect(parseSeed("12345")).toBe(parseSeed("12345"));
     expect(parseSeed(null)).toBeNull();
     expect(parseSeed("")).toBeNull();
     expect(parseSeed("  ")).toBeNull();
-    // 비숫자 문자열도 안정적 시드로 정규화
     expect(parseSeed("hello")).toBe(parseSeed("hello"));
     expect(parseSeed("hello")).not.toBe(parseSeed("world"));
   });

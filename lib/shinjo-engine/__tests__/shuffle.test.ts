@@ -42,7 +42,6 @@ describe("선택지 셔플 — 결정성 · 정답 재매핑 · 위치 분포", 
         total += 1;
       }
     }
-    // 이상적 균등 = 25%. 편향 픽스처였음에도 각 위치가 12~40% 범위면 쏠림이 깨진 것.
     for (const count of buckets) {
       const share = count / total;
       expect(share).toBeGreaterThan(0.12);
