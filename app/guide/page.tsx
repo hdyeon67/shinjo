@@ -5,7 +5,7 @@ import { GUIDES } from "@/lib/content/guides";
 export const metadata: Metadata = {
   title: "신조어 판독 가이드",
   description:
-    "신조어 모음, 레트로 유행어 사전, 신조어 테스트 — 요즘 말과 그 시절 유행어를 읽고 내 언어 나이를 판독해 보세요.",
+    "신조어 모음, 신조어 테스트 — 요즘 말을 읽고 내 언어 나이를 판독해 보세요.",
 };
 
 export default function GuideIndex() {
