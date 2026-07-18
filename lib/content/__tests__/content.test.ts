@@ -21,9 +21,9 @@ function seeds(): number[] {
 }
 
 describe("문항 풀 무결성 (v2: 최신 신조어 40)", () => {
-  it("총 40문항, id 고유", () => {
-    expect(ITEMS.length).toBe(40);
-    expect(new Set(ITEMS.map((it) => it.id)).size).toBe(40);
+  it("총 46문항, id 고유", () => {
+    expect(ITEMS.length).toBe(46);
+    expect(new Set(ITEMS.map((it) => it.id)).size).toBe(46);
   });
 
   it("모든 문항: 선택지 4개·중복 없음 · answerIndex 0~3 · 질문/해설 비어있지 않음 · eraYear 신조어 대역(≥2015)", () => {
@@ -39,9 +39,10 @@ describe("문항 풀 무결성 (v2: 최신 신조어 40)", () => {
     }
   });
 
-  it("티어 B·C·D 는 문항이 있다 (A 최신은 예리·꾸라 발주로 채움 → 없을 수 있음)", () => {
+  it("전 티어(A 최신~D 1세대)에 문항이 있다", () => {
     const byTier = { A: 0, B: 0, C: 0, D: 0 } as Record<string, number>;
     for (const it of ITEMS) byTier[tierOf(it.eraYear)] += 1;
+    expect(byTier.A).toBeGreaterThan(0); // 2025 최신 반영됨
     expect(byTier.B).toBeGreaterThan(0);
     expect(byTier.C).toBeGreaterThan(0);
     expect(byTier.D).toBeGreaterThan(0);
